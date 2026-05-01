@@ -1,0 +1,27 @@
+{
+  "overview": "Secure Vault is a cloud storage app where users can upload, organize, and securely manage their files — photos, videos, and documents — from any device. Features a modern dashboard, search, folder organization, file previews, and dark mode.",
+  "features": [
+    "File upload with progress bar (photos, videos, documents)",
+    "Folder creation and organization",
+    "Grid and list view with image thumbnails",
+    "File search and auto-categorization",
+    "Inline image preview modal",
+    "Storage usage dashboard",
+    "Dark mode toggle",
+    "User profile with Internet Identity login",
+    "Bottom navigation bar and floating upload button",
+    "Mobile-responsive layout"
+  ],
+  "category": "productivity",
+  "tags": [
+    "cloud-storage",
+    "file-management",
+    "dark-mode",
+    "upload",
+    "photos",
+    "documents",
+    "dashboard",
+    "internet-identity"
+  ],
+  "last_updated": "2026-05-01T06:39:37.112Z"
+}

@@ -1,0 +1,75 @@
+type UserProfile = 
+ record {
+   displayName: text;
+   owner: principal;
+ };
+type UpdateFolderRequest = 
+ record {
+   id: FolderId;
+   name: text;
+   parentFolderId: opt FolderId;
+ };
+type UpdateFileRequest = 
+ record {
+   folderId: opt FolderId;
+   id: FileId;
+   name: text;
+ };
+type Time = int;
+type StorageStats = 
+ record {
+   totalBytes: nat;
+   totalFiles: nat;
+ };
+type FolderId = nat;
+type Folder = 
+ record {
+   createdAt: Time;
+   id: FolderId;
+   name: text;
+   owner: principal;
+   parentFolderId: opt FolderId;
+ };
+type FileMeta = 
+ record {
+   folderId: opt FolderId;
+   id: FileId;
+   isDeleted: bool;
+   mimeType: text;
+   name: text;
+   objectStorageKey: text;
+   owner: principal;
+   size: nat;
+   uploadedAt: Time;
+ };
+type FileId = nat;
+type CreateFolderRequest = 
+ record {
+   name: text;
+   parentFolderId: opt FolderId;
+ };
+type CreateFileRequest = 
+ record {
+   folderId: opt FolderId;
+   mimeType: text;
+   name: text;
+   objectStorageKey: text;
+   size: nat;
+ };
+service : {
+  createFile: (req: CreateFileRequest) -> (FileMeta);
+  createFolder: (req: CreateFolderRequest) -> (Folder);
+  deleteFile: (id: FileId) -> (bool);
+  deleteFolder: (id: FolderId) -> (bool);
+  getFile: (id: FileId) -> (opt FileMeta) query;
+  getFolder: (id: FolderId) -> (opt Folder) query;
+  getStorageStats: () -> (StorageStats) query;
+  getUserProfile: () -> (opt UserProfile) query;
+  listFilesByCategory: (mimeTypePrefix: text) -> (vec FileMeta) query;
+  listFilesByFolder: (folderId: opt FolderId) -> (vec FileMeta) query;
+  listFolders: (parentFolderId: opt FolderId) -> (vec Folder) query;
+  searchFiles: (nameSubstring: text) -> (vec FileMeta) query;
+  setUserProfile: (displayName: text) -> ();
+  updateFile: (req: UpdateFileRequest) -> (bool);
+  updateFolder: (req: UpdateFolderRequest) -> (bool);
+}

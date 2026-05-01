@@ -1,0 +1,64 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type FileId__1064753524 = Nat;
+type FileMeta__637702407 =
+  {
+    folderId : ?FolderId__504370677;
+    id : FileId__1064753524;
+    isDeleted : Bool;
+    mimeType : Text;
+    name : Text;
+    objectStorageKey : Text;
+    owner : Principal;
+    size : Nat;
+    uploadedAt : Time__900049286
+  };
+type FolderId__504370677 = Nat;
+type Folder__1054078274 =
+  {
+    createdAt : Time__900049286;
+    id : FolderId__504370677;
+    name : Text;
+    owner : Principal;
+    parentFolderId : ?FolderId__504370677
+  };
+type Int__270357528 = Int__616954475;
+type Int__616954475 = Int;
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type StorageStats__590289606 = {totalBytes : Nat; totalFiles : Nat};
+type Time__796480547 = Int__270357528;
+type Time__900049286 = Time__796480547;
+type UserProfile__51371570 = {displayName : Text; owner : Principal};
+actor {
+  stable var _nextFileId : Nat;
+  stable var _nextFolderId : Nat;
+  stable files :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?FileMeta__637702407]];
+      var elementIndex : Nat__490723111
+    };
+  stable folders :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Folder__1054078274]];
+      var elementIndex : Nat__490723111
+    };
+  stable profiles :
+    {
+      var root : Node__46230540<Principal, UserProfile__51371570>;
+      var size : Nat__490723111
+    };
+  stable userStats :
+    {
+      var root : Node__46230540<Principal, StorageStats__590289606>;
+      var size : Nat__490723111
+    }
+};
